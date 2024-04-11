@@ -4,6 +4,6 @@ export PYTHONPATH=$conda_path/envs/pnc/lib/python3.8/site-packages/:$PYTHONPATH
 data_organize()
 {
     source organize_config.sh
-    python -c "from data_organize import data_organize;data_organize(\"$spath\",\"$tpath\")"
+    python -c "from data_organize import data_organize;data_organize(\"$spath1\",\"$spath2\",\"$tpath\")"
 }
 data_organize

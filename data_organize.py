@@ -14,13 +14,17 @@ def data_organize(spath1,spath2,tpath):
     center=camcan["center"].to_numpy()
     center=np.reshape(center,(50,17))
     for i in range(50):
-        os.makedirs("%s/subset_%02d" % (tpath, i))
+        if not os.path.exists("%s/subset_%02d" % (tpath, i)):
+            os.makedirs("%s/subset_%02d" % (tpath, i))
         shutil.copy("%s/anat/dataset_description.json" % spath2,"%s/subset_%02d" % (tpath, i))
         for j in range(17):
+            print(subids[i,j],center[i,j])
             if center[i,j]==1:
-                if os.path.exists("%s/%s_V1_MR/unprocessed/Diffusion" % (spath1,subids[i,j])) and os.path.exists("%s/%s_1_MR/unprocessed/T1w_MPR_vNav_4e_e1e2_mean" % (spath1,subids[i,j])):
-                    os.makedirs("%s/subset_%02d/sub-%s/anat" % (tpath, i, subids[i,j]))
-                    os.makedirs("%s/subset_%02d/sub-%s/dwi" % (tpath, i, subids[i,j]))
+                if os.path.exists("%s/%s_V1_MR/unprocessed/Diffusion" % (spath1,subids[i,j])) and os.path.exists("%s/%s_V1_MR/unprocessed/T1w_MPR_vNav_4e_e1e2_mean" % (spath1,subids[i,j])):
+                    if not os.path.exists("%s/subset_%02d/sub-%s/anat" % (tpath, i, subids[i,j])):
+                        os.makedirs("%s/subset_%02d/sub-%s/anat" % (tpath, i, subids[i,j]))
+                    if not os.path.exists("%s/subset_%02d/sub-%s/dwi" % (tpath, i, subids[i,j])):
+                        os.makedirs("%s/subset_%02d/sub-%s/dwi" % (tpath, i, subids[i,j]))
 
                     shutil.copy("%s/%s_V1_MR/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/%s_V1_MR_T1w_MPR_vNav_4e_e1e2_mean.nii.gz" % (spath1,subids[i,j],subids[i,j]),"%s/subset_%02d/sub-%s/anat/sub-%s_T1w.nii.gz" % (tpath, i, subids[i,j],subids[i,j]))
                     shutil.copy("%s/%s_V1_MR/unprocessed/T1w_MPR_vNav_4e_e1e2_mean/%s_V1_MR_T1w_MPR_vNav_4e_e1e2_mean.json" % (spath1,subids[i,j],subids[i,j]),"%s/subset_%02d/sub-%s/anat/sub-%s_T1w.json" % (tpath, i, subids[i,j],subids[i,j]))
@@ -41,8 +45,10 @@ def data_organize(spath1,spath2,tpath):
 
             elif center[i,j]==2:
                 if os.path.exists("%s/anat/%s/anat/%s_T1w.nii.gz" % (spath2,subids[i,j],subids[i,j])) and os.path.exists("%s/dwi/%s/dwi/%s_dwi.json" %   (spath2,subids[i,j],subids[i,j])):
-                    os.makedirs("%s/subset_%02d/%s/anat" % (tpath, i, subids[i,j]))
-                    os.makedirs("%s/subset_%02d/%s/dwi" % (tpath, i, subids[i,j]))
+                    if not os.path.exists("%s/subset_%02d/%s/anat" % (tpath, i, subids[i,j])):
+                        os.makedirs("%s/subset_%02d/%s/anat" % (tpath, i, subids[i,j]))
+                    if not os.path.exists("%s/subset_%02d/%s/dwi" % (tpath, i, subids[i,j])):
+                        os.makedirs("%s/subset_%02d/%s/dwi" % (tpath, i, subids[i,j]))
                     shutil.copy("%s/anat/%s/anat/%s_T1w.json" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/anat" %     (tpath, i, subids[i,j]))
                     shutil.copy("%s/anat/%s/anat/%s_T1w.nii.gz" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/anat" % (tpath, i,  subids[i,j]))
 

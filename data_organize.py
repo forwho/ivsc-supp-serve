@@ -44,9 +44,9 @@ def data_organize(spath1,spath2,tpath):
                     os.makedirs("%s/subset_%02d/%s/anat" % (tpath, i, subids[i,j]))
                     os.makedirs("%s/subset_%02d/%s/dwi" % (tpath, i, subids[i,j]))
                     shutil.copy("%s/anat/%s/anat/%s_T1w.json" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/anat" %     (tpath, i, subids[i,j]))
-                    shutil.copy("%s/anat/%s/anat/%s_T1w.nii.gz" % (spath2,j,subids[i,j]), "%s/subset_%02d/%s/anat" % (tpath, i,  subids[i,j]))
+                    shutil.copy("%s/anat/%s/anat/%s_T1w.nii.gz" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/anat" % (tpath, i,  subids[i,j]))
 
-                    shutil.copy("%s/dwi/%s/dwi/%s_dwi.json" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/dwi" %    (tpath, i, j))
+                    shutil.copy("%s/dwi/%s/dwi/%s_dwi.json" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/dwi" %    (tpath, i, subids[i,j]))
                     shutil.copy("%s/dwi/%s/dwi/%s_dwi.nii.gz" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/dwi" %  (tpath, i, subids[i,j]))
                     shutil.copy("%s/dwi/%s/dwi/%s_dwi.bval" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/dwi" %    (tpath, i, subids[i,j]))
                     shutil.copy("%s/dwi/%s/dwi/%s_dwi.bvec" % (spath2,subids[i,j],subids[i,j]), "%s/subset_%02d/%s/dwi" %    (tpath, i, subids[i,j]))
